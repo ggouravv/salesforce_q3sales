@@ -1,0 +1,20 @@
+.THIS .makereadonly {
+    pointer-events:none;
+}
+.THIS .cust-description-section {
+    margin-bottom: 25px;
+}
+
+.THIS .block-header-custom {
+    background-color: #eeeeee;
+    padding: 5px 15px 5px;
+    font-weight: 600;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.THIS .separator-line{
+    height: 2px;
+    background-color: #dddddd;
+}

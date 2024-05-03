@@ -1,0 +1,255 @@
+<aura:component controller='LC_LeadHelper' implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,lightning:actionOverride" access="global" >
+    
+    <!--Attributes-->
+    <aura:attribute name="reloadForm" type="boolean" default="true" />
+    <aura:attribute name="recordTitleName" type="string" />
+    <lightning:navigation aura:id="navService"/>
+    <!--Component Start-->
+    <div style='margin-left:15%;width:73%;'>
+        <div class="slds-m-around_xx-large">
+            <lightning:recordEditForm objectApiName="Lead" aura:id="leadForm" recordId="{!v.recordId}"
+                                      onsuccess="{!c.handleSuccess}" 
+                                      onerror="{!c.handleError}"
+                                      onload="{!c.handleCreateLoad}">
+                <aura:if isTrue="{!v.reloadForm}">
+                    <lightning:card>
+                        <center>
+                            <div class="slds-page-header__control">
+                                <h1>
+                                    <span class="slds-page-header__title slds-truncate">{!v.recordTitleName}</span>
+                                </h1>
+                            </div>
+                        </center><br />
+                        <div class='separator-line'></div>
+
+                        <div slot="title" class="block-header-custom">
+                            <div>Lead Card</div> 
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_4-of-8 slds-p-around_medium">
+                                <lightning:inputField fieldName="Method__c" />
+                            </div>
+                            <div class="slds-col slds-size_2-of-8 slds-p-around_medium">
+                                <lightning:inputField aura:id='companyName' fieldName="Company__c" onchange="{!c.oncompanyChange}" />
+                            </div>
+                            <div class="slds-col slds-size_2-of-8 slds-p-around_medium slds-m-top_large">
+                                <!--<lightning:button label="+ New Company" onclick="{!c.createNewCompany}" />-->
+                                <c:addCompanyFromLead />
+                            </div>
+                            
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Lead_Type__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Status" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="OwnerId" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField aura:id='Website' fieldName="Website" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField aura:id='FirstName' fieldName="FirstName"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField aura:id='LastName' fieldName="LastName"/>
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Service_Line__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Rating" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Title" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField required="true" fieldName="LeadSource" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Title_Level__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Experience__c" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Identifier__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Technology__c" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Event_Name__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Interview_Date_Time__c" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Event_Rating__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Joining_Date__c" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Event_Notes__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Rate__c" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Follow_Up_Notes__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="LinkedIn__c" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Opportunity_Name__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField aura:id='No_of_Employees__c' fieldName="No_of_Employees__c" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Meeting_Notes__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField aura:id='Industry' fieldName="Industry" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="X1st_Meeting_Date__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="AnnualRevenue" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="CreatedById" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="LastModifiedById" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Lead_Owner__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                
+                            </div>
+                        </div>
+                    </lightning:card>
+                    
+                    <lightning:card>
+                        <div slot="title" class="block-header-custom">
+                            <div>Communication Information</div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Email" required="true" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField aura:id='Phone' fieldName="Phone" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField fieldName="Secondary_Email__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField aura:id='MobilePhone' fieldName="MobilePhone" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField aura:id='WorkPhone__c' fieldName="WorkPhone__c" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                            </div>
+                        </div>
+                    </lightning:card>
+                    <lightning:card>
+                        <div slot="title" class="block-header-custom">
+                            <div>Address Information</div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField  aura:id='Street' fieldName="Street" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField aura:id='City' fieldName="City" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField  aura:id='PostalCode' fieldName="PostalCode" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField  aura:id='State' fieldName="State" />
+                            </div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField aura:id='Country' fieldName="Country" />
+                            </div>
+                        </div>
+                    </lightning:card>
+                    <lightning:card class="cust-description-section" >
+                        <div slot="title" class="block-header-custom">
+                            <div>Description Information</div>
+                        </div>
+                        <div class="slds-grid" style="margin-bottom:-1.5rem;">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField aura:id='Description' fieldName="Description" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_medium">
+                                <lightning:inputField aura:id='Company' class="makereadonly"  fieldName="Company" />
+                            </div>
+                        </div>
+                    </lightning:card>
+                    <lightning:card>  
+                        <div class="slds-docked-form-footer fixedFooter">
+                            <lightning:button variant="brand" type="submit" name="save" label="Save" />
+                            <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.handleCancel}" />
+                        </div>
+                    </lightning:card>
+                    <aura:set attribute="else">
+                        Saving...
+                    </aura:set>
+                </aura:if>
+            </lightning:recordEditForm>
+        </div>
+    </div>
+    <!--Component End-->
+    <div>
+        <lightning:recordEditForm objectApiName="Company__c"></lightning:recordEditForm>
+    </div>
+</aura:component>

@@ -1,0 +1,26 @@
+<aura:component implements="lightning:homeTemplate" description="One Header and Right Sidebar">
+    <aura:attribute name="left" type="Aura.Component[]" />
+    <aura:attribute name="right" type="Aura.Component[]" />
+    <aura:attribute name="center" type="Aura.Component[]" />
+
+    <div>
+        <lightning:layout>
+            <lightning:layoutItem size="12" >
+                {!v.center}
+            </lightning:layoutItem>
+        </lightning:layout>
+        
+        <lightning:layout>
+            
+          <lightning:layoutItem flexibility="grow"
+                                  class="slds-m-top_xx-small slds-m-right_x-small" >
+                {!v.left}
+            </lightning:layoutItem>
+            <lightning:layoutItem size="4"
+                                  class="slds-m-top_xx-small">
+                {!v.right}
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    
+</aura:component>

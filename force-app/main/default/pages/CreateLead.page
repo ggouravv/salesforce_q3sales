@@ -1,0 +1,30 @@
+<apex:page standardController="lead" setup="false" sidebar="false" showheader="true" tabStyle="lead" >
+    <apex:sectionHeader title="Lead" subtitle="New Lead"/>
+    <apex:form >
+        <apex:pageblock title="Lead Create">
+            <apex:pagemessages id="errors"> </apex:pagemessages>
+            <apex:pageblockButtons location="both">
+                <apex:commandButton value="Save" action="{!save}" reRender="errors" />
+                <apex:commandButton value="Cancel"  action="{!cancel}" />
+            </apex:pageblockButtons>
+            <apex:pageblockSection title="Lead Information" columns="2" collapsible="true">
+                <apex:inputfield value="{!Lead.Company}" />
+                <apex:inputfield value="{!Lead.Company__c}" />
+                <apex:inputfield value="{!Lead.FirstName}"  />
+                <apex:inputfield value="{!Lead.LastName}" />
+                <apex:inputfield value="{!Lead.Email}" />
+                <apex:inputfield value="{!Lead.Status}" onchange="changeCase()" />
+            </apex:pageblockSection>
+        </apex:pageblock>
+    </apex:form>
+
+    <script>    
+    function changeCase()
+    {
+        alert('Here');
+    }
+    </script>
+
+    
+    
+</apex:page>
